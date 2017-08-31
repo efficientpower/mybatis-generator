@@ -1,0 +1,26 @@
+package ${domainPath};
+
+#foreach($importStr in ${importList})
+$importStr
+#end
+
+public class ${domainName} implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+#foreach($model in ${list})
+    $model.info
+    $model.head $model.type $model.name;
+#end
+
+#foreach($model in ${list})
+    public $model.type get$model.upper_name (){
+        return $model.name;
+    }
+
+    public void set$model.upper_name ($model.type $model.name){
+        this.$model.name = $model.name;
+    }
+#end
+
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry location="C:\Users\wangjihui\workspace\mybatis-generator\src\main\resources"/>
+  <context id="context1" targetRuntime="MyBatis3">
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/solar" userId="hello" password="123456"/>
+    <javaModelGenerator targetPackage="com.netease.open.classbreak.domain" targetProject="C:\Users\src\main\java">
+      <property name="enableSubPackages" value="true"/>
+    </javaModelGenerator>
+    <sqlMapGenerator targetPackage="/" targetProject="C:\Users\src\main\resources\mybatis-mapping">
+      <property name="enableSubPackages" value="true"/>
+    </sqlMapGenerator>
+    <table tableName="module_content" domainObjectName="ModuleContent" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+      <generatedKey column="ID" sqlStatement="mysql" identity="true"/>
+    </table>
+  </context>
+</generatorConfiguration>

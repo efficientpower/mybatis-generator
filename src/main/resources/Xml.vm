@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<mapper namespace="${domainName}" >
+    <resultMap id="BaseResultMap" class="${domain_url_p}.${domainName}" >
+#foreach($info in ${infoList})
+        <result column="$info.original_column_name" property="$info.doamin_column_name" jdbcType="$info.table_type" />
+#end
+    </resultMap>
+    <sql id="Base_Column_List" >
+#foreach($info in ${infoList})
+#if($foreach.hasNext)
+        $info.original_column_name,
+#else
+        $info.original_column_name
+#end
+#end
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select
+        <include refid="${domainName}.Base_Column_List" />
+        from ${tableName} where ${pri_key} = #{id:${pri_key_type}}
+    </select>
+    <delete id="deleteByPrimaryKey">
+        delete from ${tableName} where ${pri_key} = #{id:${pri_key_type}}
+    </delete>
+    <insert id="insert" parameterType="${domain_url_p}.${domainName}" >
+        insert into ${tableName}##
+        (
+#foreach($info in ${infoList})
+#if($foreach.hasNext)
+        $info.original_column_name,
+#else
+        $info.original_column_name
+#end
+#end
+        )values(
+#foreach($info in ${infoList})
+#if($foreach.hasNext)
+        #{$info.doamin_column_name:$info.table_type},
+#else
+        #{$info.doamin_column_name:$info.table_type}
+#end
+#end
+    )
+    <selectKey resultType="java.lang.Integer" keyProperty="id" >
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="${domain_url_p}.${domainName}" >
+        update ${tableName}
+        <dynamic prepend="set" >
+#foreach($info in ${infoList})
+            <isNotNull prepend="," property="$info.doamin_column_name" >
+                $info.original_column_name = #{$info.doamin_column_name:$info.table_type}
+            </isNotNull>
+#end
+        </dynamic>
+        where ${pri_key} = #{${pri_key_upper}:${pri_key_type}}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="${domain_url_p}.${domainName}" >
+        update ${tableName}
+        set
+#foreach($info in ${infoList})
+#if($foreach.hasNext)
+        $info.original_column_name = #{$info.doamin_column_name:$info.table_type},
+#else
+        $info.original_column_name = #{$info.doamin_column_name:$info.table_type}
+#end
+#end
+        where ${pri_key} = #{${pri_key_upper}:${pri_key_type}}
+    </update>
+
+    <select id="list" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select
+        <include refid="${domainName}.Base_Column_List" />
+        from ${tableName}
+        <isNotNull property="orderBy">
+        order by #{orderBy} desc
+        </isNotNull>
+        limit #{start:INTEGER},#{limit:INTEGER}
+    </select>
+
+</mapper>

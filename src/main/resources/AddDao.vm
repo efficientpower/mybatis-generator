@@ -1,0 +1,8 @@
+package ${daoPath};
+
+import ${entityPath}.${className};
+import com.netease.open.common.dao.BaseDaoI;
+
+public interface ${className}Dao extends BaseDaoI<${className}>{
+
+}

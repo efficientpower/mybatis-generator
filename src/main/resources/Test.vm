@@ -1,0 +1,35 @@
+package ${daoPath};
+
+import org.junit.Test;
+import com.netease.open.test.BaseTestCase;
+import org.springframework.beans.factory.annotation.Autowired;
+import ${daoPath}.${domainName}Dao;
+import ${entityPath}.${domainName};
+import java.util.List;
+
+public class ${domainName}DaoTest extends BaseTestCase {
+
+    @Autowired
+    private ${domainName}Dao ${s_domainName}Dao;
+
+    @Test
+    public void insertTest() {
+        //TODO
+    }
+
+    @Test
+    public void updateAndGetByIdTest(){
+        //TODO
+    }
+
+    @Test
+    public void deleteTest() {
+        //TODO
+    }
+
+    @Test
+    public void listTest() {
+        //TODO
+    }
+
+}

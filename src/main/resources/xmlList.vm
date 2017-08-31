@@ -1,0 +1,9 @@
+  <select id="list" resultMap="BaseResultMap" parameterType="java.util.Map" >
+      select
+      <include refid="Base_Column_List" />
+      from ${tableName}
+      <if test="orderBy != null" >
+          order by ${orderBy}
+      </if>
+      limit #{start,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+  </select>
